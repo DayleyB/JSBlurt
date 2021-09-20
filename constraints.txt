@@ -1,0 +1,73 @@
+Ends with A
+Ends with B
+Ends with C
+Ends with D
+Ends with E
+Ends with F
+Ends with G
+Ends with H
+Ends with J
+Ends with K
+Ends with L
+Ends with M
+Ends with N
+Ends with O
+Ends with P
+Ends with R
+Ends with S
+Ends with T
+Ends with U
+Ends with V
+Ends with W
+Ends with X
+Ends with Y
+Ends with Z
+Begins with A
+Begins with B
+Begins with C
+Begins with D
+Begins with E
+Begins with F
+Begins with G
+Begins with H
+Begins with I
+Begins with J
+Begins with K
+Begins with L
+Begins with M
+Begins with N
+Begins with O
+Begins with P
+Begins with Q
+Begins with R
+Begins with S
+Begins with T
+Begins with U
+Begins with V
+Begins with W
+Begins with Y
+Begins with Z
+Does not contain A
+Does not contain E
+Does not contain I
+Does not contain O
+Does not contain U
+Does not contain B
+Does not contain C
+Does not contain D
+Does not contain F
+Does not contain G
+Does not contain H
+Does not contain J
+Does not contain K
+Does not contain L
+Does not contain M
+Does not contain N
+Does not contain P
+Does not contain R
+Does not contain S
+Does not contain T
+Does not contain V
+Does not contain W
+Does not contain Y
+Does not contain Z

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blurt</title>
+
+    <link rel="stylesheet" href="blurt.css">
+
+     <!-- Latest compiled and minified CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+     <!-- jQuery library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
+     <!-- Popper JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ 
+     <!-- Latest compiled JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+     <script src="blurt.js"></script>
+</head>
+<body style="background-color: gainsboro;">
+    <div class="container">
+        <h1>Welcome to Blurt!</h1>
+        <!-- could put additional error messages here as well, 
+            or say look below for errors, in case it's off the screen -->
+        <div class="setup_game">
+            
+            <form>
+                <h4>Select how many players/teams:</h4>
+                <input type="radio" id="2" name="team_count" value="2" checked>
+                <label for="2">2</label><br>
+                <input type="radio" id="3" name="team_count" value="3">
+                <label for="3">3</label><br>
+                <input type="radio" id="4" name="team_count" value="4">
+                <label for="4">4</label>
+
+                <h4>Name the teams:</h4>
+                <label for="team1" >Team 1: </label>
+                <input type="text" id="teamName1" name="teamName1" value="Team 1">
+                <span id=teamName1Error></span><br>
+
+                <label for="team2">Team 2: </label>
+                <input type="text" id="teamName2" name="teamName2" value="Team 2">
+                <span id=teamName2Error></span><br>
+
+                <div id="team3div">
+                    <label for="team3" id="team3l">Team 3: </label>
+                    <input type="text" id="teamName3" name="teamName3" value="Team 3">
+                    <span id=teamName3Error></span><br>
+                </div>
+                <div id="team4div">
+                    <label for="team4" id="team4l">Team 4: </label>
+                    <input type="text" id="teamName4" name="teamName4" value="Team 4">
+                    <span id=teamName3Error></span><br>
+                </div>
+                
+                <h4>Rounds:</h4>
+                <label for="rounds">How many rounds?</label>
+                <input type="text" id="roundCount" name="roundCount" value="1" size="3">
+                <span id="roundCountError"></span><br>
+                
+                <div name="startGame" id="startGame">Start Game</div>
+                <span id="startGameError"></span>
+                
+            </form>
+
+            <p id="testPromises"></p>
+        </div> <!-- class = setup_game -->
+
+        <div class="run_game">
+            <p id="gameTitle"></p>
+
+        </div> <!-- class = run_game -->
+
+
+    </div> <!-- class = container -->
+    
+</body>
+</html>
