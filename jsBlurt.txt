@@ -1,0 +1,73 @@
+Blurt game using Javascript
+
+User Requirements:
+  Choose new game
+    choose how many teams
+      name the teams
+  Choose how many rounds
+  Timed or not?
+  On key press
+      show a constraint and a statement
+      start a timer
+        call it a tie? key press for next round
+      on key press
+        enter which team won
+      on key press, continue game
+  when last round ends, show which team wins
+  ask to play again
+    same team, go back to how many rounds
+    new teams, go back to choose how many teams
+  
+Psuedocode:
+
+what needs to be done, not how
+
+initialize data (arrays of constraints and statements)
+ask how many teams
+name the teams
+create game object (game number, # of teams and their names; //timed default 0 meaning to timer)
+ask how many rounds
+create rounds object (contains constraints and statements, tied to game object)
+// pick the timer value and change on game object - add later
+set up event listeners (callback functions)
+  game advance
+  quit
+  new game
+  // timer timed out
+  update score
+message
+  space to continue/ advance game
+  q to quit
+  e edit  
+space bar shows
+  show constraint and statement
+  // check for timer, start if true (callback?)
+quit
+  prompt are you sure
+  if no, return
+  if yes, thanks for playing
+new game
+  starts over
+timer timed out
+  ding ding
+  time's up, press space bar to continue??
+update score
+  choose which team gets a point
+  update on the screen
+when rounds end, show which team won
+ask play again
+  same team, ask how any rounds and change rounds object
+  different teams, create new game object and rounds object
+  
+
+think about:
+  function to disable event listeners, when editing, for example
+  function to reenable event listeners (use same function that sets them up?)
+  
+  semaphore
+  
+
+
+
+
+
