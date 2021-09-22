@@ -157,7 +157,7 @@ function runGame() {
     $(".setup_game").hide();
     $(".run_game").show();
     document.getElementById("gameTitle").innerHTML = "Rounds: " + numberOfRounds + " Teams:" + numberOfTeams + " Team Names: " + teamNames +
-        "<br>" + StatementArray + "<br>" + ConstraintArray; 
+        "<br><br>" + StatementArray[0] + "<br>" + ConstraintArray[0]; 
 
 }
 
