@@ -1,4 +1,7 @@
 // check input fields for functions, etc
+
+// global variables
+var qSemaphore = false;
 var numberOfTeams;
 var teamNames = [];
 var numberOfRounds;
@@ -143,7 +146,7 @@ $(document).ready(function(){
         // if team names and round count are valid, start the game
         if (teamNameResult && roundCountResult) {
             //start game
-            clearMsg("startGame", "starting");
+            clearMsg("startGame", "");
             runGame();
 
         } else {
@@ -155,9 +158,59 @@ $(document).ready(function(){
 
 function runGame() {
     $(".setup_game").hide();
-    $(".run_game").show();
-    document.getElementById("gameTitle").innerHTML = "Rounds: " + numberOfRounds + " Teams:" + numberOfTeams + " Team Names: " + teamNames +
-        "<br><br>" + StatementArray[0] + "<br>" + ConstraintArray[0]; 
 
+    // turn on key stroke event listeners
+    $(document).on('keypress', function(e){
+        gameKeys(e.key);
+    });
+    
+    $(".run_game").show();
+}
+
+function updateGameStatus(currentRound){
+    
+
+}
+
+function gameKeys(key) {
+    
+    switch (key) {
+        case ' ': //space bar
+            // advance the game, show next statement and constraint
+            break;
+        case 'q':
+            // check if it's running (false means not running)
+            if (qSemaphore != true) {
+                // say that it's running
+                qSemaphore = true;
+                // turn off key listeners
+                $(document).off('keypress', function(e){});
+                // hid game screen
+                $(".run_game").hide();                
+                // show set up div
+                $(".setup_game").show();
+                qSemaphore = false;
+            }            
+            break;
+        case '1':
+            // add point to team 1
+            break;
+        case '2':
+            //add point to team 2
+            break;
+        case '3':
+            // add point to team 3
+            break;
+        case '4':
+            // add point to team 4
+            break;
+        case '-':
+            // ask which team to take a point away from
+            break;
+        default:
+            //something
+            break;
+            
+    }
 }
 

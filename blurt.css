@@ -2,4 +2,20 @@
 .container {
     background-color: gainsboro;
     color:forestgreen;
+    font-size: 40px;
+    
 }
+
+.container h4 {
+    font-size: 50px;
+}
+/*
+.run_game {
+    font-size: calc(.8rem + 1vw);
+}
+
+@media screen {
+     
+    
+}
+*/

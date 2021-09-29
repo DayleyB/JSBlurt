@@ -40,6 +40,7 @@ message
   q to quit
   e edit  
 space bar shows
+  countdown (3 2 1), time before next one shows
   show constraint and statement
   // check for timer, start if true (callback?)
 quit

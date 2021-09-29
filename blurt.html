@@ -24,11 +24,10 @@
 </head>
 <body style="background-color: gainsboro;">
     <div class="container">
-        <h1>Welcome to Blurt!</h1>
         <!-- could put additional error messages here as well, 
             or say look below for errors, in case it's off the screen -->
         <div class="setup_game">
-            
+            <h1>Welcome to Blurt!</h1>
             <form>
                 <h4>Select how many players/teams:</h4>
                 <input type="radio" id="2" name="team_count" value="2" checked>
@@ -72,8 +71,23 @@
         </div> <!-- class = setup_game -->
 
         <div class="run_game">
-            <p id="gameTitle"></p>
+            <h1>Blurt It Out!</h1>
+            <a name="top"></a>
+            <div>
 
+            </div>
+            <p id="nextRound">
+                Tap here for next round.
+            </p>
+            <h4>Instructions:</h4>
+            <p>
+                Tap + to add a point.<br>
+                Tap - to remove a point.<br>
+                Tap "next round" to move on.<br>
+                Tap "quit" to start over.<br>
+                <a href="#top">Back to top of page</a>
+            </p>
+           
         </div> <!-- class = run_game -->
 
 
