@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv-"Cache-Control" content="no-store" />
     <title>Blurt</title>
 
     <link rel="stylesheet" href="blurt.css">
@@ -79,13 +80,49 @@
             <p id="nextRound">
                 Tap here for next round.
             </p>
+            <div class="showStatAndCons">
+                <p>A word that...</p>
+                <p id="constraint"></p>
+                <p> and is </p>
+                <p id="statement"></p>
+                <br>
+                <p id="roundUpdater">Round: </p>
+                <!-- Team 1 name and scoring -->
+                <span id="addTeam1" class="scoreSigns">&nbsp;+&nbsp;</span>
+                <span id="team1">Team 1</span>
+                <span id="subTeam1" class="scoreSigns">&nbsp;-&nbsp;</span>
+                <span id="team1score"></span>
+                <br>
+
+                 <!-- Team 2 name and scoring -->
+                 <span id="addTeam2" class="scoreSigns">&nbsp;+&nbsp;</span>
+                 <span id="team2">Team 2</span>
+                 <span id="subTeam2" class="scoreSigns">&nbsp;-&nbsp;</span>
+                 <span id="team2score"></span>
+                 <br>
+
+                  <!-- Team 3 name and scoring -->
+                <span id="addTeam3" class="scoreSigns">&nbsp;+&nbsp;</span>
+                <span id="team3">Team 3</span>
+                <span id="subTeam3" class="scoreSigns">&nbsp;-&nbsp;</span>
+                <span id="team3score"></span>
+                <br>
+
+                 <!-- Team 4 name and scoring -->
+                 <span id="addTeam4" class="scoreSigns">&nbsp;+&nbsp;</span>
+                 <span id="team4">Team 4</span>
+                 <span id="subTeam4" class="scoreSigns">&nbsp;-&nbsp;</span>
+                 <span id="team4score"></span>
+                 <br>
+
+            </div> <!-- class = showStatAndCons-->
+
             <h4>Instructions:</h4>
             <p>
                 Tap + to add a point.<br>
                 Tap - to remove a point.<br>
                 Tap "next round" to move on.<br>
                 Tap "quit" to start over.<br>
-                <a href="#top">Back to top of page</a>
             </p>
            
         </div> <!-- class = run_game -->

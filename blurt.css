@@ -1,13 +1,28 @@
+:root {
+    --button-bg-color: #f0af6f;
+}
+
 
 .container {
     background-color: gainsboro;
-    color:forestgreen;
-    font-size: 40px;
+    color:black;
+    font-size: 22px;
     
 }
 
 .container h4 {
+    font-size: 28px;
+}
+
+.container #startGame {
+    background-color: var(--button-bg-color);
+}
+.container .scoreSigns {
     font-size: 50px;
+    background-color: var(--button-bg-color);
+    min-width: 3rem;
+    max-width: 3rem;
+
 }
 /*
 .run_game {
