@@ -11,7 +11,8 @@ var StatementArray = [];
 var ConstraintArray = [];
 
 function teamFields (count) {
-    // change to what it should be, don't assume some aren't there
+    // this shows the number of fields selected by the radio button
+    // to enter a team name
     switch(count) {
         case "3":
             $("#team3div").show();
@@ -28,6 +29,8 @@ function teamFields (count) {
     }
 }
 
+// these Msg functions can be called to set/clear an error message
+// the id of the error span is the id of the checked field + "Error"
 function errMsg (inputID , msg) {
     document.getElementById(inputID + "Error").style.color = "red";
     document.getElementById(inputID + "Error").innerHTML = msg;
@@ -38,26 +41,25 @@ function clearMsg (inputID, msg) {
     document.getElementById(inputID + "Error").innerHTML = msg;
 }
 
-function checkTeamName (count) {
-    let teamNameRegEx = /\S/;
-    for (let i = 1; i <= Number(count); i++) {
-        let teamName = "teamName" + String(i);
-        let teamNameValue = document.getElementById(teamName).value;
-        let result = teamNameRegEx.test(teamNameValue);
-        if (result == false) {
-            // show error message next to input field
-            errMsg(teamName, "field required");
-            return false;
-        }
-        else {
-            clearMsg(teamName, "Original!");
-            // msg ideas; could check the message against a variable ("boring if still Team 1", etc)
-            return true;
-        }
+function checkTeamName (teamNameID) {
+    // team name must exist and can be anything the keyboard can type
+    let teamNameRegEx = /\S/; // used to check for empty field
+    let teamNameValue = document.getElementById(teamNameID).value; 
+    let result = teamNameRegEx.test(teamNameValue);
+    if (result == false) {
+        // show error message next to input field
+        errMsg(teamNameID, "field required");
+        return false;
+    }
+    else {
+        clearMsg(teamNameID, "Original!");
+        // msg ideas; could check the message against a variable ("boring if still Team 1", etc)
+        return true;
     }
 }
 
-function checkRoundCount (count) {    
+function checkRoundCount (count) {
+    // verify round count is between global min and max
     if ((count < roundMin) || (count > roundMax)) {
         errMsg("roundCount", "Please enter a number between " + roundMin + " and " + roundMax + ".");
         return false;
@@ -103,22 +105,25 @@ $(document).ready(function(){
     let promiseStatements = fetchStatements();
     let promiseConstraints = fetchConstraints();
 
-
+    // always start with 2 team fields showing; hides team name 3 and 4 fields
     teamFields("2");
-    //change function specific to radio button (team_count)
+
+    // setting up change callback function specific to radio button (team_count)
     $("input[name='team_count']").change(function(){ 
-        teamFields(document.querySelector('input[name="team_count"]:checked').value);
+        numberOfTeams = document.querySelector('input[name="team_count"]:checked').value;
+        teamFields(numberOfTeams);
     });
 
-    // check fields, team names are required
-    $("input[type=text]").change(function(){
-        checkTeamName(document.querySelector('input[name="team_count"]:checked').value);        
+    // check input field when it changes
+    $("input[class='teamName']").change(function(event){ 
+        checkTeamName(event.target.id); //event.target.id is the field that triggered the event
+        // https://stackoverflow.com/questions/48239/getting-the-id-of-the-element-that-fired-an-event
     });
 
     document.getElementById("roundCountError").innerHTML = roundMin + " - " + roundMax;
 
     // check rounds, input needs to be 1-30
-    $("input[type=text]").change(function(){
+    $("input[name='roundCount']").change(function(){
         checkRoundCount(document.getElementById("roundCount").value);
     });
 
@@ -127,14 +132,19 @@ $(document).ready(function(){
         // assign radio button value to numberofTeams
         numberOfTeams = document.querySelector('input[name="team_count"]:checked').value;
 
-        // checking if team Names are valid (returns true or false)
-        let teamNameResult = checkTeamName(document.querySelector('input[name="team_count"]:checked').value);
-        
-        // getting team name input and pushing to global array
+        // checking if team Names are valid (returns true or false)         
+        // if true, get team name input and push to global array
+        let teamNameResult = true; // assume team names are good
+        teamNames = [];
         for (let i = 1; i <= Number(numberOfTeams); i++) {
-            let teamName = "teamName" + String(i);
+            let teamName = "teamName" + String(i); // id of team name fields
             let teamNameValue = document.getElementById(teamName).value;
-            teamNames.push(teamNameValue);
+                teamNames.push(teamNameValue);
+            if (!checkTeamName(teamName)) {
+                // got a bad team name, set variable so it won't continue
+                teamNameResult = false; 
+            }
+            
         }
 
         // checking if round count is valid (returns true or false)
@@ -156,6 +166,25 @@ $(document).ready(function(){
     })
 });
 
+function teamScoreFields (count) {
+    // why and how - need to show only team scores of present teams, hide others
+
+    document.getElementById("team1").innerHTML = teamNames[0];
+    document.getElementById("team2").innerHTML = teamNames[1];
+    $("#team3score").hide();
+    $("#team4score").hide();
+
+    if (count > 2) {
+        $("#team3score").show();    
+        document.getElementById("team3").innerHTML = teamNames[2];        
+    }
+    if (count > 3) {
+        $("#team4score").show();
+        document.getElementById("team4").innerHTML = teamNames[3];
+    }
+}
+
+
 function runGame() {
     $(".setup_game").hide();
 
@@ -165,6 +194,8 @@ function runGame() {
     });
     
     $(".run_game").show();
+
+    teamScoreFields(numberOfTeams);   
 }
 
 function updateGameStatus(currentRound){
