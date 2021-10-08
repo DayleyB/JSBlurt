@@ -6,24 +6,40 @@
 .container {
     background-color: gainsboro;
     color:black;
-    font-size: 22px;
-    
+    font-size: 22px;    
+    max-width: 350px;
 }
 
 .container h4 {
     font-size: 28px;
 }
 
-.container #startGame {
+.container #checkGame, #tapForRound {
     background-color: var(--button-bg-color);
+    border-radius: 8px;
 }
+
+p.wordBorder {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 8px;
+    padding-left: 5px;
+    background-color: aliceblue;
+    font-size: 32px;
+}
+
 .container .scoreSigns {
     font-size: 50px;
     background-color: var(--button-bg-color);
     min-width: 3rem;
     max-width: 3rem;
+    border-radius: 8px;
 
 }
+
+
+
 /*
 .run_game {
     font-size: calc(.8rem + 1vw);

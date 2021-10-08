@@ -7,11 +7,13 @@
     <meta http-equiv-"Cache-Control" content="no-store" />
     <title>Blurt</title>
 
-    <link rel="stylesheet" href="blurt.css">
+    
 
      <!-- Latest compiled and minified CSS -->
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+     <link rel="stylesheet" href="blurt.css">
+    
      <!-- jQuery library -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  
@@ -55,16 +57,17 @@
                 <div id="team4div">
                     <label for="team4" id="team4l">Team 4: </label>
                     <input class="teamName" type="text" maxlength="20" id="teamName4" name="teamName4" value="Team 4">
-                    <span id=teamName3Error></span><br>
+                    <span id=teamName4Error></span><br>
                 </div>
                 
                 <h4>Rounds:</h4>
                 <label for="rounds">How many rounds?</label>
-                <input type="text" id="roundCount" name="roundCount" value="1" size="3">
+                <input type="text" id="roundCount" name="roundCount" value="1" size="1">
                 <span id="roundCountError"></span><br>
+                                
+                <span id="checkGameError"></span><br>
+                <div name="checkGame" id="checkGame">Tap here when ready</div>
                 
-                <div name="startGame" id="startGame">Start Game</div>
-                <span id="startGameError"></span>
                 
             </form>
 
@@ -74,20 +77,19 @@
         <div class="run_game">
             <h1>Blurt It Out!</h1>
             <a name="top"></a>
-            <div>
-
+            <div id="tapForRound"></div> <!-- contents set programatically -->
+            <div id="lastRound">
+                This is the last round.
             </div>
-            <p id="nextRound">
-                Tap here for next round.
-            </p>
+           
             <div class="showStatAndCons">
                 <!-- TODO: have + and - line up -->
                 <p>A word that...</p>
-                <p id="constraint"></p>
+                <p id="constraint" class="wordBorder"></p>
                 <p> and is </p>
-                <p id="statement"></p>
+                <p id="statement" class="wordBorder"></p>
                 <br>
-                <p id="roundUpdater">Round: </p>
+                <p id="roundUpdater"></p>
                 <!-- Team 1 name and scoring -->
                 <span id="addTeam1" class="scoreSigns">&nbsp;+&nbsp;</span>
                 <span id="team1">Team 1</span>

@@ -5,6 +5,7 @@ var qSemaphore = false;
 var numberOfTeams;
 var teamNames = [];
 var numberOfRounds;
+var currentRound = 0;
 var roundMin = 1;
 var roundMax = 30;
 var StatementArray = [];
@@ -37,7 +38,7 @@ function errMsg (inputID , msg) {
 }
 
 function clearMsg (inputID, msg) {
-    document.getElementById(inputID + "Error").style.color = "";
+    document.getElementById(inputID + "Error").style.color = "initial";
     document.getElementById(inputID + "Error").innerHTML = msg;
 }
 
@@ -85,6 +86,7 @@ $(document).ready(function(){
                     response.text().then(
                         function(textString) {
                             window.StatementArray = textString.split(/\r|\n/);
+                            StatementArray.pop();                            
                         }
                     )
                 }
@@ -97,6 +99,7 @@ $(document).ready(function(){
                 response.text().then(
                     function(textString) {
                         window.ConstraintArray = textString.split(/\r|\n/);
+                        ConstraintArray.pop();
                     }
                 )
             }
@@ -127,8 +130,8 @@ $(document).ready(function(){
         checkRoundCount(document.getElementById("roundCount").value);
     });
 
-    // start game
-    $("div[name=startGame]").click(function(){
+    // check game before running it
+    $("div[name=checkGame]").click(function(){
         // assign radio button value to numberofTeams
         numberOfTeams = document.querySelector('input[name="team_count"]:checked').value;
 
@@ -146,24 +149,36 @@ $(document).ready(function(){
             }
             
         }
-
-        // checking if round count is valid (returns true or false)
-        let roundCountResult = checkRoundCount(document.getElementById("roundCount").value);
-        
         // assign number of rounds to global
         numberOfRounds = document.getElementById("roundCount").value;
+
+        // checking if round count is valid (returns true or false)
+        let roundCountResult = checkRoundCount(numberOfRounds);        
         
         // if team names and round count are valid, start the game
         if (teamNameResult && roundCountResult) {
             //start game
-            clearMsg("startGame", "");
+            clearMsg("checkGame", "");
             runGame();
 
         } else {
             // think mobile, put error at top and by the start game button
-            errMsg(startGame, "fix errors above");
+            errMsg("checkGame", "fix errors above");
         }
     })
+
+    // listener for tapForRound
+    $("div[id='tapForRound']").click(function(){
+        updateGameStatus(); 
+
+        // hide this element if it's the last round
+        if (currentRound >= numberOfRounds) {
+            $("#tapForRound").hide();
+            $("#lastRound").show();
+        }
+        
+
+    });
 });
 
 function teamScoreFields (count) {
@@ -184,6 +199,21 @@ function teamScoreFields (count) {
     }
 }
 
+function shuffleArray(array) {
+    let curId = array.length;
+    // There remain elements to shuffle
+    while (0 !== curId) {
+      // Pick a remaining element
+      let randId = Math.floor(Math.random() * curId);
+      curId -= 1;
+      // Swap it with the current element.
+      let tmp = array[curId];
+      array[curId] = array[randId];
+      array[randId] = tmp;
+    }
+    return array;
+  }
+// https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
 
 function runGame() {
     $(".setup_game").hide();
@@ -193,13 +223,35 @@ function runGame() {
         gameKeys(e.key);
     });
     
-    $(".run_game").show();
+    $("#lastRound").hide();
 
-    teamScoreFields(numberOfTeams);   
+    document.getElementById("tapForRound").innerHTML = "Tap here for the first round.";
+    document.getElementById("constraint").innerHTML = "&nbsp;"; // &nbsp; is a no break space
+    document.getElementById("statement").innerHTML = "&nbsp;";
+    $("tapForRound").show();    
+    $("#roundUpdater").show(); // shows current round div
+    currentRound = 0;
+
+    teamScoreFields(numberOfTeams);
+
+    // build randomized arrays for the current game (statement and constraint)
+    shuffleArray(StatementArray);
+    shuffleArray(ConstraintArray);
+
+    $(".run_game").show();
 }
 
-function updateGameStatus(currentRound){
+
+function updateGameStatus(){
+    // display constraint and statement
+    document.getElementById("tapForRound").innerHTML = "Tap here for the next round.";
+    document.getElementById("constraint").innerHTML = ConstraintArray[currentRound];
+    document.getElementById("statement").innerHTML = StatementArray[currentRound];
     
+    // add one to current round
+    currentRound += 1; // add one here cuz array is 0 relative, humans usually start with 1
+    document.getElementById("roundUpdater").innerHTML = "Round: " + currentRound + " of " + numberOfRounds;    
+
 
 }
 
