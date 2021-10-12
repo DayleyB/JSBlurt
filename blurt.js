@@ -1,5 +1,7 @@
 // check input fields for functions, etc
 
+// comments - why and how
+
 // global variables
 var qSemaphore = false;
 var numberOfTeams;
@@ -169,15 +171,14 @@ $(document).ready(function(){
 
     // listener for tapForRound
     $("div[id='tapForRound']").click(function(){
+        $(".showStatAndCons").show();
         updateGameStatus(); 
 
         // hide this element if it's the last round
         if (currentRound >= numberOfRounds) {
-            $("#tapForRound").hide();
+            $("#tapForRound").hide(); // hides the clickable div
             $("#lastRound").show();
         }
-        
-
     });
 });
 
@@ -217,6 +218,7 @@ function shuffleArray(array) {
 
 function runGame() {
     $(".setup_game").hide();
+    $(".showStatAndCons").hide();
 
     // turn on key stroke event listeners
     $(document).on('keypress', function(e){
@@ -250,11 +252,11 @@ function updateGameStatus(){
     
     // add one to current round
     currentRound += 1; // add one here cuz array is 0 relative, humans usually start with 1
-    document.getElementById("roundUpdater").innerHTML = "Round: " + currentRound + " of " + numberOfRounds;    
-
-
+    document.getElementById("roundUpdater").innerHTML = "Round: " + currentRound + " of " + numberOfRounds;
 }
 
+
+// not really using this, trying to make everything mobile friendly (tap-able)
 function gameKeys(key) {
     
     switch (key) {
@@ -292,8 +294,6 @@ function gameKeys(key) {
             break;
         default:
             //something
-            break;
-            
+            break;    
     }
 }
-
