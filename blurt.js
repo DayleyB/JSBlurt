@@ -12,6 +12,10 @@ var roundMin = 1;
 var roundMax = 30;
 var StatementArray = [];
 var ConstraintArray = [];
+var team1points = 0; //need to start at 0 or it's NaN, or undefined
+var team2points = 0;
+var team3points = 0;
+var team4points = 0;
 
 function teamFields (count) {
     // this shows the number of fields selected by the radio button
@@ -180,22 +184,31 @@ $(document).ready(function(){
             $("#lastRound").show();
         }
     });
-});
+
+    // add/subtract - listen to scoreSigns class
+    $("span[class='scoreSigns']").click(function(event){
+        //document.getElementById("team2score").innerHTML = event.target.id // show what's being clicked for testing...
+        eventID = event.target.id;
+        updateGameScore(eventID);
+    })
+
+
+}); // end of ready function
 
 function teamScoreFields (count) {
     // why and how - need to show only team scores of present teams, hide others
 
     document.getElementById("team1").innerHTML = teamNames[0];
     document.getElementById("team2").innerHTML = teamNames[1];
-    $("#team3score").hide();
-    $("#team4score").hide();
+    $("#team3ScoreDiv").hide();
+    $("#team4ScoreDiv").hide();
 
     if (count > 2) {
-        $("#team3score").show();    
+        $("#team3ScoreDiv").show();    
         document.getElementById("team3").innerHTML = teamNames[2];        
     }
     if (count > 3) {
-        $("#team4score").show();
+        $("#team4ScoreDiv").show();
         document.getElementById("team4").innerHTML = teamNames[3];
     }
 }
@@ -253,6 +266,50 @@ function updateGameStatus(){
     // add one to current round
     currentRound += 1; // add one here cuz array is 0 relative, humans usually start with 1
     document.getElementById("roundUpdater").innerHTML = "Round: " + currentRound + " of " + numberOfRounds;
+}
+
+function updateGameScore(eventID){
+    // slice the part of the id needed? or case statement?
+    switch(eventID) {
+        case 'addTeam1':
+            team1points += 1;
+            document.getElementById("team1score").innerHTML = "Score: " + team1points;
+            break;
+        case 'subTeam1':
+            team1points -= 1;
+            document.getElementById("team1score").innerHTML = "Score: " + team1points;
+            break;
+        case 'addTeam2':
+            team2points += 1;
+            document.getElementById("team2score").innerHTML = "Score: " + team2points;
+            break;
+        case 'subTeam2':
+            team2points -= 1;
+            document.getElementById("team2score").innerHTML = "Score: " + team2points;
+            break;
+        case 'addTeam3':
+            team3points += 1;
+            document.getElementById("team3score").innerHTML = "Score: " + team3points;
+            break;
+        case 'subTeam3':
+            team3points -= 1;
+            document.getElementById("team3score").innerHTML = "Score: " + team3points;
+            break;
+        case 'addTeam4':
+            team4points += 1;
+            document.getElementById("team4score").innerHTML = "Score: " + team4points;
+            break;
+        case 'subTeam4':
+            team4points -= 1;
+            document.getElementById("team4score").innerHTML = "Score: " + team4points;
+            break;
+        default:
+            //something
+            break;
+
+        // TODO: set scores back to 0 when new game starts
+
+    }
 }
 
 
