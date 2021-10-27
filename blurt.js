@@ -192,6 +192,14 @@ $(document).ready(function(){
         updateGameScore(eventID);
     })
 
+    // listener for weDone
+    $("div[id='weDone']").click(function(){
+        // hide game screen
+        $(".run_game").hide();                
+        // show set up div
+        $(".setup_game").show();
+    });
+
 
 }); // end of ready function
 
@@ -230,30 +238,30 @@ function shuffleArray(array) {
 // https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
 
 function runGame() {
+    
     $(".setup_game").hide();
     $(".showStatAndCons").hide();
-
-    // turn on key stroke event listeners
-    $(document).on('keypress', function(e){
-        gameKeys(e.key);
-    });
-    
     $("#lastRound").hide();
 
     document.getElementById("tapForRound").innerHTML = "Tap here for the first round.";
     document.getElementById("constraint").innerHTML = "&nbsp;"; // &nbsp; is a no break space
     document.getElementById("statement").innerHTML = "&nbsp;";
-    $("tapForRound").show();    
+    $("#tapForRound").show();    
     $("#roundUpdater").show(); // shows current round div
     currentRound = 0;
+    team1points = 0;
+    team2points = 0;
+    team3points = 0;
+    team4points = 0;
+    displayGameScore();
 
     teamScoreFields(numberOfTeams);
 
     // build randomized arrays for the current game (statement and constraint)
     shuffleArray(StatementArray);
     shuffleArray(ConstraintArray);
-
-    $(".run_game").show();
+    
+    $(".run_game").show();    
 }
 
 
@@ -270,87 +278,46 @@ function updateGameStatus(){
 
 function updateGameScore(eventID){
     // slice the part of the id needed? or case statement?
+    // put scores in an array, and update the needed array item?
     switch(eventID) {
         case 'addTeam1':
             team1points += 1;
-            document.getElementById("team1score").innerHTML = "Score: " + team1points;
             break;
         case 'subTeam1':
             team1points -= 1;
-            document.getElementById("team1score").innerHTML = "Score: " + team1points;
             break;
         case 'addTeam2':
             team2points += 1;
-            document.getElementById("team2score").innerHTML = "Score: " + team2points;
             break;
         case 'subTeam2':
             team2points -= 1;
-            document.getElementById("team2score").innerHTML = "Score: " + team2points;
             break;
         case 'addTeam3':
             team3points += 1;
-            document.getElementById("team3score").innerHTML = "Score: " + team3points;
             break;
         case 'subTeam3':
             team3points -= 1;
-            document.getElementById("team3score").innerHTML = "Score: " + team3points;
             break;
         case 'addTeam4':
             team4points += 1;
-            document.getElementById("team4score").innerHTML = "Score: " + team4points;
             break;
         case 'subTeam4':
             team4points -= 1;
-            document.getElementById("team4score").innerHTML = "Score: " + team4points;
             break;
         default:
-            //something
+            errMsg("score", "Contact the developer!");
             break;
-
-        // TODO: set scores back to 0 when new game starts
-
     }
+    displayGameScore();
 }
 
-
-// not really using this, trying to make everything mobile friendly (tap-able)
-function gameKeys(key) {
-    
-    switch (key) {
-        case ' ': //space bar
-            // advance the game, show next statement and constraint
-            break;
-        case 'q':
-            // check if it's running (false means not running)
-            if (qSemaphore != true) {
-                // say that it's running
-                qSemaphore = true;
-                // turn off key listeners
-                $(document).off('keypress', function(e){});
-                // hid game screen
-                $(".run_game").hide();                
-                // show set up div
-                $(".setup_game").show();
-                qSemaphore = false;
-            }            
-            break;
-        case '1':
-            // add point to team 1
-            break;
-        case '2':
-            //add point to team 2
-            break;
-        case '3':
-            // add point to team 3
-            break;
-        case '4':
-            // add point to team 4
-            break;
-        case '-':
-            // ask which team to take a point away from
-            break;
-        default:
-            //something
-            break;    
+function displayGameScore() {
+    document.getElementById("team1score").innerHTML = "Score: " + team1points;
+    document.getElementById("team2score").innerHTML = "Score: " + team2points;
+    if (numberOfTeams > 2) {
+        document.getElementById("team3score").innerHTML = "Score: " + team3points;
+    }
+    if (numberOfTeams > 3) {
+        document.getElementById("team4score").innerHTML = "Score: " + team4points;
     }
 }
