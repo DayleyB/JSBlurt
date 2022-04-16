@@ -1,27 +1,18 @@
 Ends with A
-Ends with B
 Ends with C
 Ends with D
 Ends with E
-Ends with F
 Ends with G
 Ends with H
-Ends with J
 Ends with K
 Ends with L
-Ends with M
 Ends with N
 Ends with O
 Ends with P
 Ends with R
 Ends with S
 Ends with T
-Ends with U
-Ends with V
-Ends with W
-Ends with X
 Ends with Y
-Ends with Z
 Begins with A
 Begins with B
 Begins with C
@@ -36,17 +27,10 @@ Begins with K
 Begins with L
 Begins with M
 Begins with N
-Begins with O
 Begins with P
-Begins with Q
 Begins with R
 Begins with S
 Begins with T
-Begins with U
-Begins with V
-Begins with W
-Begins with Y
-Begins with Z
 Does not contain A
 Does not contain E
 Does not contain I
